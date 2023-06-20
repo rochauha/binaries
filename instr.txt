@@ -1,0 +1,40 @@
+
+sk-instr-gfx908:	file format elf64-amdgpu
+
+
+Disassembly of section .text:
+
+0000000000002000 <_Z4add1Pi>:
+	s_mov_b32 s2, 0                                            // 000000002000: BE8200FF 00000000
+	s_mov_b32 s3, 0x10000c                                     // 000000002008: BE8300FF 0010000C
+	s_setpc_b64 s[2:3]                                         // 000000002010: BE801D02
+	v_cndmask_b32_e32 v128, s0, v0, vcc                        // 000000002014: 01000000
+	s_waitcnt vmcnt(0)                                         // 000000002018: BF8C0F70
+	v_add_u32_e32 v1, 1, v1                                    // 00000000201C: 68020281
+	global_store_dword v0, v1, s[0:1]                          // 000000002020: DC708000 00000100
+	s_endpgm                                                   // 000000002028: BF810000
+
+Disassembly of section .init.dyninst:
+
+0000000000101000 <.init.dyninst>:
+	.long 0xe5894855                                           // 000000101000: E5894855
+	.byte 0xc9, 0xc3                                           // 000000101004: C9 C3
+
+Disassembly of section .fini.dyninst:
+
+0000000000101006 <.fini.dyninst>:
+	.long 0xe5894855                                           // 000000101006: E5894855
+	.byte 0xc9, 0xc3                                           // 00000010100A: C9 C3
+
+Disassembly of section .dyninstInst:
+
+000000000010100c <.dyninstInst>:
+	s_nop 0                                                    // 00000010100C: BF800000
+	s_load_dwordx2 s[0:1], s[4:5], 0x0                         // 000000101010: C0060002 00000000
+	v_lshlrev_b32_e32 v0, 2, v0                                // 000000101018: 24000082
+	s_waitcnt lgkmcnt(0)                                       // 00000010101C: BF8CC07F
+	global_load_dword v1, v0, s[0:1]                           // 000000101020: DC508000 01000000
+	s_waitcnt vmcnt(0)                                         // 000000101028: BF8C0F70
+	v_add_u32_e32 v1, 1, v1                                    // 00000010102C: 68020281
+	global_store_dword v0, v1, s[0:1]                          // 000000101030: DC708000 00000100
+	s_endpgm                                                   // 000000101038: BF810000
